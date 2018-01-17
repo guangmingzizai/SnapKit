@@ -218,3 +218,11 @@ public class ConstraintMaker {
     }
     
 }
+
+public extension ConstraintMaker {
+    public func scalable() {
+        for description in descriptions {
+            description.constant = description.constant.scalable()
+        }
+    }
+}

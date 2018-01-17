@@ -145,3 +145,39 @@ extension ConstraintConstantTarget {
     }
     
 }
+
+public enum ScaleBase {
+    case width, height
+}
+
+public extension ConstraintConstantTarget {
+    public func scalable(base: ScaleBase = .width, referenceSize: CGSize = CGSize(width: 375, height: 667)) -> ConstraintConstantTarget {
+        if let value = self as? CGFloat {
+            return scalableValue(value: value, base: base, referenceSize: referenceSize)
+        }
+        
+        if let value = self as? Float {
+            return scalableValue(value: CGFloat(value), base: base, referenceSize: referenceSize)
+        }
+        
+        if let value = self as? Double {
+            return scalableValue(value: CGFloat(value), base: base, referenceSize: referenceSize)
+        }
+        
+        if let value = self as? Int {
+            return scalableValue(value: CGFloat(value), base: base, referenceSize: referenceSize)
+        }
+        
+        if let value = self as? UInt {
+            return scalableValue(value: CGFloat(value), base: base, referenceSize: referenceSize)
+        }
+        return self
+    }
+    
+    internal func scalableValue(value: CGFloat, base: ScaleBase = .width, referenceSize: CGSize = CGSize(width: 375, height: 667)) -> CGFloat {
+        let referenceWidth = referenceSize.width, referenceHeight = referenceSize.height
+        let screenWidth = UIScreen.main.bounds.width, screenHeight = UIScreen.main.bounds.height
+        
+        return (value * (base == .width ? (screenWidth / referenceWidth) : (screenHeight / referenceHeight)))
+    }
+}
