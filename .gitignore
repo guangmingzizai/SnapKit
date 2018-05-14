@@ -5,3 +5,4 @@ Examples/
 Gemfile
 Gemfile.lock
 *.sketch
+SnapKit.xcworkspace/xcshareddata/

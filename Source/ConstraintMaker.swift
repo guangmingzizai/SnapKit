@@ -220,9 +220,9 @@ public class ConstraintMaker {
 }
 
 public extension ConstraintMaker {
-    public func scalable() {
+    public func scalable(base: ScaleBase = .width, referenceSize: CGSize = CGSize(width: 375, height: 667)) {
         for description in descriptions {
-            description.constant = description.constant.scalable()
+            description.constant = description.constant.scalable(base: base, referenceSize: referenceSize)
         }
     }
 }
